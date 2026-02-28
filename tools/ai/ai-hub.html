@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Productivity | Utility OS</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="bg-[#09090b] text-zinc-100 p-6 pb-24">
+
+    <nav class="mb-8">
+        <a href="../../index.html" class="inline-flex items-center gap-2 text-zinc-500 hover:text-purple-500 transition-colors">
+            <i data-lucide="arrow-left" class="w-4 h-4"></i>
+            <span class="text-sm font-medium">Back to Dashboard</span>
+        </a>
+    </nav>
+
+    <header class="mb-10">
+        <h2 class="text-2xl font-bold tracking-tight text-white">AI <span class="text-purple-500">Productivity</span></h2>
+        <p class="text-zinc-500 text-sm">Content & Prompt Engineering</p>
+    </header>
+
+    <div class="space-y-8">
+        <section class="p-6 rounded-2xl bg-zinc-900 border border-zinc-800 space-y-4">
+            <div class="flex items-center gap-3 text-purple-400">
+                <i data-lucide="youtube" class="w-6 h-6"></i>
+                <h3 class="font-bold text-zinc-100">YT Transcript to Blog</h3>
+            </div>
+            <input id="yt-url" type="url" class="w-full bg-black border border-zinc-800 rounded-xl p-3 text-sm outline-none focus:border-purple-500 text-zinc-300" placeholder="Paste YouTube URL here...">
+            <button onclick="simulateYTConversion()" class="w-full bg-purple-600 hover:bg-purple-500 py-3 rounded-xl font-bold text-sm transition-all active:scale-95 shadow-lg shadow-purple-900/20">Generate Blog Post</button>
+            
+            <div id="blog-output-area" class="hidden animate-in fade-in duration-500">
+                <div class="flex justify-between items-center mb-2">
+                    <span class="text-[10px] text-zinc-500 uppercase tracking-widest font-bold">Markdown Result</span>
+                    <button onclick="copyBlog()" class="text-purple-400 text-xs font-bold">Copy All</button>
+                </div>
+                <div id="blog-output" class="p-4 bg-black border border-zinc-800 rounded-lg text-xs leading-relaxed text-zinc-400 overflow-y-auto max-h-60 whitespace-pre-wrap"></div>
+            </div>
+        </section>
+
+        <section class="p-6 rounded-2xl bg-zinc-900 border border-zinc-800 space-y-4">
+            <div class="flex items-center gap-3 text-amber-400">
+                <i data-lucide="wand-2" class="w-6 h-6"></i>
+                <h3 class="font-bold text-zinc-100">Prompt Refiner</h3>
+            </div>
+            <textarea id="prompt-input" class="w-full h-24 bg-black border border-zinc-800 rounded-xl p-3 text-sm outline-none focus:border-amber-500 text-zinc-300" placeholder="Enter a basic prompt (e.g., Write a recipe)..."></textarea>
+            <button onclick="refinePrompt()" class="w-full bg-amber-600 hover:bg-amber-500 py-3 rounded-xl font-bold text-sm transition-all active:scale-95">Refine for Pro Results</button>
+        </section>
+    </div>
+
+    <script>
+        lucide.createIcons();
+
+        // 1. YouTube to Blog (Simulation for now)
+        function simulateYTConversion() {
+            const url = document.getElementById('yt-url').value;
+            if(!url) return alert('Please enter a URL');
+            
+            const outputArea = document.getElementById('blog-output-area');
+            const outputBox = document.getElementById('blog-output');
+            
+            outputArea.classList.remove('hidden');
+            outputBox.innerText = `### Blog Post: Insights from Video\n\n**Introduction**\nThis video explores key concepts regarding [Topic].\n\n**Key Takeaways**\n1. First major point discussed in the transcript.\n2. Deep dive into the methodology.\n3. Final summary and conclusion.\n\n*Generated via UtilityOS AI*`;
+        }
+
+        function copyBlog() {
+            const text = document.getElementById('blog-output').innerText;
+            navigator.clipboard.writeText(text);
+            alert('Blog Markdown copied!');
+        }
+
+        // 2. Prompt Refiner (Rule-based for now)
+        function refinePrompt() {
+            const input = document.getElementById('prompt-input').value;
+            if(!input) return alert('Enter a prompt first');
+            
+            const refined = `Act as an expert consultant. Regarding "${input}", provide a comprehensive, step-by-step guide with clear constraints, a professional tone, and specific examples to ensure high-quality output.`;
+            
+            document.getElementById('prompt-input').value = refined;
+            alert('Prompt has been "Leveled Up"!');
+        }
+    </script>
+</body>
+</html>
