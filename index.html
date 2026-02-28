@@ -3,116 +3,114 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UtilityOS | The Universal Toolkit</title>
+    <title>UtilityOS | The Universal File Engine</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap');
-        
         body { 
             background-color: #020617; 
             color: #f8fafc; 
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            overflow-x: hidden;
+            font-family: 'Inter', sans-serif;
         }
-
-        /* Animated Background Glow */
-        .bg-glow {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle at 50% -20%, #1e1b4b 0%, #020617 80%);
-            z-index: -1;
+        .hero-glow {
+            background: radial-gradient(circle at 50% 50%, rgba(79, 70, 229, 0.15) 0%, transparent 50%);
+            position: absolute; top: -20%; left: 0; right: 0; bottom: 0; z-index: -1;
         }
-
-        /* Hover Interaction: The "SaaS" Pop */
-        .tool-card {
-            background: rgba(15, 23, 42, 0.6);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            backdrop-filter: blur(12px);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            cursor: pointer;
+        .glass-panel {
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
-
-        .tool-card:hover {
-            transform: translateY(-8px) scale(1.02);
-            border-color: rgba(59, 130, 246, 0.5);
-            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5), 0 0 20px rgba(59, 130, 246, 0.1);
+        .drop-zone {
+            border: 2px dashed rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
         }
-
-        .tool-card:active { transform: scale(0.98); }
-
-        /* Icon Glow Effect */
-        .icon-box { transition: all 0.3s ease; }
-        .tool-card:hover .icon-box { transform: rotate(10deg) scale(1.1); }
-        
-        .badge { font-size: 9px; font-weight: 800; letter-spacing: 0.1em; }
+        .drop-zone:hover {
+            border-color: #6366f1;
+            background: rgba(99, 102, 241, 0.05);
+        }
+        .btn-primary {
+            background: linear-gradient(to bottom right, #6366f1, #4f46e5);
+            box-shadow: 0 4px 14px 0 rgba(79, 70, 229, 0.39);
+        }
     </style>
 </head>
-<body class="p-6 md:p-12">
-    <div class="bg-glow"></div>
+<body class="min-h-screen">
+    <div class="hero-glow"></div>
 
-    <header class="max-w-5xl mx-auto mb-16 flex justify-between items-start">
-        <div class="space-y-2">
-            <h1 class="text-4xl font-extrabold tracking-tighter italic">Utility<span class="text-blue-500">OS</span></h1>
-            <p class="text-zinc-500 text-sm font-medium uppercase tracking-[0.2em]">Global Release v2.1</p>
+    <nav class="flex justify-between items-center px-8 py-6 max-w-7xl mx-auto">
+        <div class="text-xl font-extrabold tracking-tighter flex items-center gap-2">
+            <div class="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center">
+                <i data-lucide="zap" class="w-5 h-5 fill-white text-white"></i>
+            </div>
+            Utility<span class="text-indigo-500">OS</span>
         </div>
-        <button class="bg-white text-black px-6 py-2 rounded-full text-xs font-bold hover:bg-blue-500 hover:text-white transition-all shadow-xl">GO PRO</button>
-    </header>
+        <div class="hidden md:flex gap-8 text-sm font-semibold text-slate-400">
+            <a href="#" class="hover:text-white transition-colors">Converters</a>
+            <a href="#" class="hover:text-white transition-colors">Pricing</a>
+            <a href="#" class="hover:text-white transition-colors">API</a>
+        </div>
+        <button class="text-sm font-bold bg-slate-800 px-6 py-2.5 rounded-full border border-slate-700 hover:bg-slate-700 transition-all">Sign In</button>
+    </nav>
 
-    <main class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
-        
-        <a href="tools/media/media-hub.html" class="tool-card p-8 rounded-[2.5rem] flex flex-col justify-between h-64">
-            <div class="icon-box w-14 h-14 bg-blue-600/10 text-blue-500 rounded-2xl flex items-center justify-center border border-blue-500/20">
-                <i data-lucide="layers" class="w-7 h-7"></i>
-            </div>
-            <div>
-                <span class="badge text-blue-500 uppercase mb-2 block">Visual Engine</span>
-                <h2 class="text-2xl font-bold">Media Hub</h2>
-                <p class="text-zinc-500 text-sm mt-1">SVG to Tailwind, Image Compression & Video Snapshot.</p>
-            </div>
-        </a>
+    <main class="max-w-4xl mx-auto mt-20 px-6 text-center">
+        <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight mb-6 bg-clip-text text-transparent bg-gradient-to-b from-white to-slate-500">
+            Convert anything,<br>anywhere.
+        </h1>
+        <p class="text-slate-400 text-lg mb-12 max-w-xl mx-auto font-medium">
+            Professional-grade file conversion engine. Secure, fast, and entirely in your browser.
+        </p>
 
-        <a href="tools/ai/ai-hub.html" class="tool-card p-8 rounded-[2.5rem] flex flex-col justify-between h-64">
-            <div class="icon-box w-14 h-14 bg-purple-600/10 text-purple-500 rounded-2xl flex items-center justify-center border border-purple-500/20">
-                <i data-lucide="sparkles" class="w-7 h-7"></i>
+        <div class="glass-panel p-4 md:p-8 rounded-[2rem] shadow-2xl relative">
+            <div class="drop-zone rounded-[1.5rem] py-20 flex flex-col items-center justify-center cursor-pointer relative overflow-hidden group">
+                <input type="file" class="absolute inset-0 opacity-0 cursor-pointer" multiple id="fileInput">
+                <div class="w-16 h-16 bg-indigo-600/20 text-indigo-500 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-500">
+                    <i data-lucide="plus" class="w-8 h-8"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-1">Choose Files</h3>
+                <p class="text-slate-500 text-sm font-medium">or drag and drop them here</p>
             </div>
-            <div>
-                <span class="badge text-purple-500 uppercase mb-2 block">Neural Bridge</span>
-                <h2 class="text-2xl font-bold">AI Productivity</h2>
-                <p class="text-zinc-500 text-sm mt-1">YouTube to Markdown, Prompt Refiner & Smart Summary.</p>
+            
+            <div class="mt-6 flex flex-wrap justify-center gap-4">
+                <div class="flex items-center gap-2 bg-slate-900/50 px-4 py-2 rounded-full border border-slate-800 text-xs font-bold text-slate-400">
+                    <i data-lucide="image" class="w-3.5 h-3.5"></i> IMG to PDF
+                </div>
+                <div class="flex items-center gap-2 bg-slate-900/50 px-4 py-2 rounded-full border border-slate-800 text-xs font-bold text-slate-400">
+                    <i data-lucide="file-json" class="w-3.5 h-3.5"></i> JSON Prettifier
+                </div>
+                <div class="flex items-center gap-2 bg-slate-900/50 px-4 py-2 rounded-full border border-slate-800 text-xs font-bold text-slate-400">
+                    <i data-lucide="video" class="w-3.5 h-3.5"></i> MP4 to GIF
+                </div>
             </div>
-        </a>
+        </div>
 
-        <a href="tools/clean/clean-hub.html" class="tool-card p-8 rounded-[2.5rem] flex flex-col justify-between h-64 border-rose-500/10 hover:border-rose-500/50">
-            <div class="icon-box w-14 h-14 bg-rose-600/10 text-rose-500 rounded-2xl flex items-center justify-center border border-rose-500/20">
-                <i data-lucide="shield-check" class="w-7 h-7"></i>
-            </div>
-            <div>
-                <span class="badge text-rose-500 uppercase mb-2 block">Sanitization</span>
-                <h2 class="text-2xl font-bold">Clean-Up Pro</h2>
-                <p class="text-zinc-500 text-sm mt-1">JSON Fixer, Metadata Stripper & Rapid Cheat Sheets.</p>
-            </div>
-        </a>
-
-        <a href="tools/cloud/cloud-hub.html" class="tool-card p-8 rounded-[2.5rem] flex flex-col justify-between h-64 border-amber-500/10 hover:border-amber-500/50">
-            <div class="icon-box w-14 h-14 bg-amber-600/10 text-amber-500 rounded-2xl flex items-center justify-center border border-amber-500/20">
-                <i data-lucide="cloud-cog" class="w-7 h-7"></i>
-            </div>
-            <div>
-                <span class="badge text-amber-500 uppercase mb-2 block">Architecture</span>
-                <h2 class="text-2xl font-bold">Cloud Est.</h2>
-                <p class="text-zinc-500 text-sm mt-1">Multi-Provider (AWS/GCP/Azure) Burn Rate Calculator.</p>
-            </div>
-        </a>
-
+        <div class="mt-24 grid grid-cols-2 md:grid-cols-4 gap-8 opacity-50 grayscale hover:grayscale-0 transition-all duration-700">
+            <div class="text-xs font-black uppercase tracking-widest">Global Privacy</div>
+            <div class="text-xs font-black uppercase tracking-widest">Zero Tracking</div>
+            <div class="text-xs font-black uppercase tracking-widest">Client-Side</div>
+            <div class="text-xs font-black uppercase tracking-widest">Ad-Supported</div>
+        </div>
     </main>
 
-    <footer class="max-w-5xl mx-auto mt-20 text-center py-10 border-t border-zinc-900">
-        <p class="text-[10px] text-zinc-600 font-bold uppercase tracking-[0.4em]">Designed for Global Monetization © 2026</p>
-    </footer>
+    <div class="fixed bottom-8 left-1/2 -translate-x-1/2 w-[90%] max-w-2xl bg-slate-900 border border-indigo-500/30 p-4 rounded-2xl flex items-center justify-center gap-4 shadow-2xl">
+        <div class="text-[10px] bg-indigo-500 text-white px-2 py-0.5 rounded font-black">PRO</div>
+        <p class="text-xs font-bold text-slate-300 italic">Upgrade for unlimited bulk conversions and no ads.</p>
+        <button class="text-xs font-black text-indigo-400 uppercase tracking-tighter">Learn More</button>
+    </div>
 
     <script>
         lucide.createIcons();
+        
+        // Basic drag & drop interaction
+        const fileInput = document.getElementById('fileInput');
+        fileInput.addEventListener('change', (e) => {
+            if(e.target.files.length > 0) {
+                // Redirect to the Clean Hub or Media Hub depending on type
+                // For this demo, we'll just alert.
+                alert(`${e.target.files.length} files detected. Processing locally...`);
+            }
+        });
     </script>
 </body>
 </html>
