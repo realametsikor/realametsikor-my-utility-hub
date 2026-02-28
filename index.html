@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Utility OS</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body { background-color: #09090b; color: #fafafa; font-family: sans-serif; }
+        .glass { background: rgba(24, 24, 27, 0.8); backdrop-filter: blur(12px); border: 1px solid #27272a; }
+    </style>
+</head>
+<body class="pb-20">
+
+    <header class="p-6 border-b border-zinc-800 flex justify-between items-center glass sticky top-0 z-50">
+        <h1 class="text-xl font-bold tracking-tight">Utility<span class="text-blue-500">OS</span></h1>
+        <i data-lucide="layers" class="text-blue-500"></i>
+    </header>
+
+    <main id="app-container" class="p-4 max-w-md mx-auto space-y-6">
+        <section id="tool-svg" class="space-y-4">
+            <div class="flex items-center gap-2 mb-2">
+                <i data-lucide="code-2" class="text-zinc-400"></i>
+                <h2 class="text-lg font-semibold">SVG to Tailwind</h2>
+            </div>
+            <textarea id="svg-input" class="w-full h-40 bg-zinc-900 border border-zinc-800 rounded-xl p-4 text-sm font-mono focus:ring-2 focus:ring-blue-500 outline-none" placeholder="Paste SVG code here..."></textarea>
+            <button onclick="convertSVG()" class="w-full bg-blue-600 hover:bg-blue-500 py-3 rounded-xl font-medium transition-all active:scale-95">Convert to Component</button>
+            <div id="output-area" class="hidden space-y-2">
+                <p class="text-xs text-zinc-500">React/Tailwind Output:</p>
+                <pre id="svg-output" class="p-4 bg-black border border-zinc-800 rounded-lg text-[10px] overflow-x-auto whitespace-pre-wrap text-emerald-400"></pre>
+            </div>
+        </section>
+    </main>
+
+    <nav class="fixed bottom-0 left-0 right-0 glass border-t border-zinc-800 p-4 flex justify-around items-center">
+        <button class="flex flex-col items-center gap-1 text-blue-500"><i data-lucide="box"></i><span class="text-[10px]">Media</span></button>
+        <button class="flex flex-col items-center gap-1 text-zinc-500"><i data-lucide="shield-check"></i><span class="text-[10px]">Clean</span></button>
+        <button class="flex flex-col items-center gap-1 text-zinc-500"><i data-lucide="cloud"></i><span class="text-[10px]">Cloud</span></button>
+        <button class="flex flex-col items-center gap-1 text-zinc-500"><i data-lucide="sparkles"></i><span class="text-[10px]">AI</span></button>
+    </nav>
+
+    <script>
+        // Initialize Icons
+        lucide.createIcons();
+
+        // SVG Converter Logic
+        function convertSVG() {
+            const input = document.getElementById('svg-input').value;
+            const outputArea = document.getElementById('output-area');
+            const outputBox = document.getElementById('svg-output');
+
+            if(!input.includes('<svg')) return alert('Please paste valid SVG code');
+
+            // Simple transformation logic
+            let converted = input.replace(/class=/g, 'className=')
+                                 .replace(/<svg/g, '<svg className="w-6 h-6 text-blue-500"');
+            
+            outputBox.innerText = `export const Icon = () => (\n  ${converted}\n);`;
+            outputArea.classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
