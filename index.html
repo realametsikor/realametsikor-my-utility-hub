@@ -3,62 +3,93 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Utility OS</title>
+    <title>UtilityOS | All-in-One Developer & Media Toolkit</title>
+    <meta name="description" content="Professional-grade cloud estimator, image compressor, metadata scrubber, and AI productivity tools. All-in-one suite for global developers.">
+    <meta name="keywords" content="Cloud Cost Estimator, Image Compressor, SVG to Tailwind, Metadata Remover, AI Tools">
+    
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="UtilityOS | The Universal Developer Toolkit">
+    <meta property="og:description" content="Free, private, and powerful tools for the modern web.">
+
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        :root { --accent: #3b82f6; }
+        body { background-color: #020617; color: #f8fafc; font-family: 'Inter', sans-serif; }
+        .hero-gradient { background: radial-gradient(circle at 50% -20%, #1e3a8a 0%, #020617 80%); }
+        .feature-card { background: rgba(30, 41, 59, 0.5); border: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(10px); transition: all 0.3s ease; }
+        .feature-card:hover { border-color: var(--accent); transform: translateY(-5px); box-shadow: 0 10px 30px -10px rgba(59, 130, 246, 0.3); }
+    </style>
 </head>
-<body class="bg-black text-white p-6 pb-24">
+<body>
 
-    <header class="mb-10 mt-4">
-        <h1 class="text-3xl font-bold tracking-tighter">Utility<span class="text-blue-500">OS</span></h1>
-        <p class="text-zinc-500 text-xs uppercase tracking-widest">System Online</p>
+    <nav class="flex justify-between items-center px-6 py-6 max-w-6xl mx-auto">
+        <div class="text-2xl font-black italic tracking-tighter">Utility<span class="text-blue-500">OS</span></div>
+        <div class="hidden md:flex gap-8 text-sm font-medium text-zinc-400">
+            <a href="#features" class="hover:text-white">Features</a>
+            <a href="https://github.com/your-username" class="hover:text-white">GitHub</a>
+        </div>
+        <button class="bg-blue-600 px-5 py-2 rounded-full text-sm font-bold hover:bg-blue-500 transition-all">Go Pro</button>
+    </nav>
+
+    <header class="hero-gradient pt-20 pb-32 px-6 text-center">
+        <h1 class="text-5xl md:text-7xl font-black tracking-tighter mb-6">Built for the <span class="text-blue-500 underline decoration-8 underline-offset-8">Global</span> Creator.</h1>
+        <p class="text-zinc-400 max-w-2xl mx-auto text-lg md:text-xl leading-relaxed">
+            A high-performance suite of media, cloud, and AI tools. Zero tracking. 100% Client-side. Built for speed and privacy.
+        </p>
     </header>
 
-    <div class="grid grid-cols-1 gap-4">
+    <main id="features" class="max-w-6xl mx-auto px-6 -mt-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         
-        <a href="tools/media/media-hub.html" class="block p-5 rounded-2xl bg-zinc-900 border border-zinc-800 active:bg-zinc-800 transition-all">
-            <div class="flex items-center gap-4">
-                <div class="p-3 rounded-xl bg-blue-500/20 text-blue-500">
-                    <i data-lucide="layers"></i>
-                </div>
-                <div>
-                    <h3 class="font-bold">Smart Media</h3>
-                    <p class="text-xs text-zinc-500">SVG & Compression</p>
-                </div>
+        <a href="tools/media/media-hub.html" class="feature-card p-8 rounded-3xl flex flex-col gap-4">
+            <div class="w-12 h-12 bg-blue-600/20 text-blue-500 rounded-2xl flex items-center justify-center">
+                <i data-lucide="camera"></i>
+            </div>
+            <div>
+                <h3 class="text-xl font-bold">Smart Media</h3>
+                <p class="text-zinc-500 text-sm mt-2 font-medium">Compress images, convert SVGs, and generate GIFs instantly.</p>
             </div>
         </a>
 
-        <a href="tools/ai/ai-hub.html" class="block p-5 rounded-2xl bg-zinc-900 border border-zinc-800 active:bg-zinc-800 transition-all">
-            <div class="flex items-center gap-4">
-                <div class="p-3 rounded-xl bg-purple-500/20 text-purple-500">
-                    <i data-lucide="sparkles"></i>
-                </div>
-                <div>
-                    <h3 class="font-bold">AI Suite</h3>
-                    <p class="text-xs text-zinc-500">YT to Blog</p>
-                </div>
+        <a href="tools/ai/ai-hub.html" class="feature-card p-8 rounded-3xl flex flex-col gap-4">
+            <div class="w-12 h-12 bg-purple-600/20 text-purple-500 rounded-2xl flex items-center justify-center">
+                <i data-lucide="sparkles"></i>
+            </div>
+            <div>
+                <h3 class="text-xl font-bold">AI Suite</h3>
+                <p class="text-zinc-500 text-sm mt-2 font-medium">Turn YouTube videos into SEO-ready blog posts in seconds.</p>
             </div>
         </a>
 
-        <a href="tools/clean/clean-hub.html" class="block p-5 rounded-2xl bg-zinc-900 border border-zinc-800 active:bg-zinc-800 transition-all">
-            <div class="flex items-center gap-4">
-                <div class="p-3 rounded-xl bg-rose-500/20 text-rose-500">
-                    <i data-lucide="shield-check"></i>
-                </div>
-                <div>
-                    <h3 class="font-bold">Clean-Up</h3>
-                    <p class="text-xs text-zinc-500">Privacy Tools</p>
-                </div>
+        <a href="tools/clean/clean-hub.html" class="feature-card p-8 rounded-3xl flex flex-col gap-4">
+            <div class="w-12 h-12 bg-rose-600/20 text-rose-500 rounded-2xl flex items-center justify-center">
+                <i data-lucide="shield-check"></i>
+            </div>
+            <div>
+                <h3 class="text-xl font-bold">Clean-Up</h3>
+                <p class="text-zinc-500 text-sm mt-2 font-medium">Professional metadata scrubbing and duplicate file removal.</p>
             </div>
         </a>
 
-    </div>
+        <a href="tools/cloud/cloud-hub.html" class="feature-card p-8 rounded-3xl flex flex-col gap-4">
+            <div class="w-12 h-12 bg-amber-600/20 text-amber-500 rounded-2xl flex items-center justify-center">
+                <i data-lucide="cloud-cog"></i>
+            </div>
+            <div>
+                <h3 class="text-xl font-bold">Cloud Est.</h3>
+                <p class="text-zinc-500 text-sm mt-2 font-medium">Global architecture cost estimator for AWS, Azure, and GCP.</p>
+            </div>
+        </a>
 
-    <script>
-        // Ensure this runs after the page loads
-        window.onload = function() {
-            lucide.createIcons();
-        };
-    </script>
+    </main>
+
+    <footer class="mt-40 border-t border-zinc-900 py-20 px-6 text-center">
+        <div class="max-w-6xl mx-auto flex flex-col items-center gap-6">
+            <div class="text-xl font-black italic tracking-tighter">Utility<span class="text-blue-500">OS</span></div>
+            <p class="text-zinc-600 text-sm max-w-md">© 2026 UtilityOS. Launched globally for a faster, more private internet experience.</p>
+        </div>
+    </footer>
+
+    <script>lucide.createIcons();</script>
 </body>
 </html>
