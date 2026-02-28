@@ -3,83 +3,78 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Clean-Up Suite | Utility OS</title>
+    <title>Clean-Up & Dev Tools | UtilityOS</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
-        body { background-color: #050505; color: #fafafa; font-family: -apple-system, sans-serif; }
+        body { background-color: #050505; color: #fafafa; font-family: sans-serif; }
         .glass { background: rgba(23, 23, 23, 0.7); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.05); }
-        .status-badge { font-size: 10px; font-weight: 800; letter-spacing: 0.05em; padding: 2px 8px; border-radius: 4px; }
+        .code-area { background: #000; border: 1px solid #27272a; font-family: monospace; }
     </style>
 </head>
-<body class="pb-24">
+<body class="pb-32">
 
     <nav class="p-6">
         <a href="../../index.html" class="inline-flex items-center gap-2 text-zinc-500 hover:text-rose-500 transition-all">
             <i data-lucide="arrow-left" class="w-4 h-4"></i>
-            <span class="text-sm font-bold uppercase tracking-widest">Dashboard</span>
+            <span class="text-sm font-bold uppercase tracking-widest text-[10px]">Back to Hub</span>
         </a>
     </nav>
 
-    <main class="px-6 max-w-md mx-auto space-y-8">
+    <main class="px-6 max-w-2xl mx-auto space-y-10">
         
         <header>
-            <h1 class="text-3xl font-black tracking-tighter italic">Clean-Up <span class="text-rose-500">Suite</span></h1>
-            <p class="text-zinc-500 text-xs font-medium">Privacy-First Data Sanitization</p>
+            <h1 class="text-3xl font-black tracking-tighter italic">Clean-Up <span class="text-rose-500">Pro</span></h1>
+            <p class="text-zinc-500 text-sm font-medium">Global Sanitization & Developer Utility</p>
         </header>
 
         <section class="glass p-6 rounded-3xl space-y-4">
-            <div class="flex justify-between items-start">
-                <div class="flex items-center gap-3 text-rose-500">
-                    <i data-lucide="shield-off"></i>
-                    <h3 class="font-bold">Metadata Scrubber</h3>
-                </div>
-                <span id="scrub-badge" class="status-badge bg-zinc-800 text-zinc-500 uppercase">Ready</span>
+            <div class="flex items-center gap-3 text-emerald-400">
+                <i data-lucide="braces"></i>
+                <h3 class="font-bold">JSON Fixer & Formatter</h3>
             </div>
-            
-            <p class="text-[11px] text-zinc-500 leading-relaxed">Strips GPS coordinates, camera serial numbers, and timestamps from image headers.</p>
-            
-            <div class="relative group">
-                <input type="file" id="scrub-input" accept="image/*" class="hidden" onchange="processScrub(event)">
-                <label for="scrub-input" class="flex flex-col items-center justify-center border-2 border-dashed border-zinc-800 rounded-2xl py-10 cursor-pointer hover:border-rose-500/50 transition-all active:scale-95">
-                    <i data-lucide="upload" class="text-zinc-700 mb-2"></i>
-                    <span class="text-xs font-bold text-zinc-400">Upload Image</span>
-                </label>
+            <textarea id="json-input" class="w-full h-40 code-area rounded-xl p-4 text-xs outline-none focus:border-emerald-500/50" placeholder="Paste messy or broken JSON here..."></textarea>
+            <div class="grid grid-cols-2 gap-3">
+                <button onclick="formatJSON()" class="bg-emerald-600/10 text-emerald-500 border border-emerald-500/20 py-3 rounded-xl font-bold text-xs uppercase tracking-widest">Format</button>
+                <button onclick="minifyJSON()" class="bg-zinc-800 text-zinc-400 py-3 rounded-xl font-bold text-xs uppercase tracking-widest">Minify</button>
             </div>
         </section>
 
         <section class="glass p-6 rounded-3xl space-y-4">
-            <div class="flex items-center gap-3 text-amber-500">
-                <i data-lucide="copy"></i>
-                <h3 class="font-bold text-zinc-100">Duplicate Check</h3>
+            <div class="flex items-center gap-3 text-rose-500">
+                <i data-lucide="shield-off"></i>
+                <h3 class="font-bold">Privacy Metadata Stripper</h3>
             </div>
-            
-            <div class="grid grid-cols-2 gap-3">
-                <div class="relative">
-                    <input type="file" id="file1" class="hidden" onchange="updateFileLabel(1)">
-                    <label for="file1" id="label1" class="block p-4 bg-black border border-zinc-800 rounded-xl text-[10px] text-center truncate font-mono text-zinc-500 uppercase italic">File A</label>
-                </div>
-                <div class="relative">
-                    <input type="file" id="file2" class="hidden" onchange="updateFileLabel(2)">
-                    <label for="file2" id="label2" class="block p-4 bg-black border border-zinc-800 rounded-xl text-[10px] text-center truncate font-mono text-zinc-500 uppercase italic">File B</label>
-                </div>
+            <div class="border-2 border-dashed border-zinc-800 rounded-2xl py-10 flex flex-col items-center justify-center relative">
+                <input type="file" id="strip-input" accept="image/*" class="absolute inset-0 opacity-0 cursor-pointer" onchange="stripMetadata(event)">
+                <i data-lucide="image" class="text-zinc-700 mb-2"></i>
+                <span id="strip-status" class="text-xs font-bold text-zinc-500">Tap to Strip EXIF/GPS</span>
             </div>
-
-            <button onclick="compareFiles()" class="w-full bg-amber-600/10 text-amber-500 border border-amber-500/20 py-3 rounded-xl font-black text-xs uppercase tracking-widest active:scale-95 transition-all">Compare Bytes</button>
-            <div id="compare-result" class="text-center text-[10px] font-bold tracking-widest uppercase h-4"></div>
         </section>
 
-        <section class="glass p-6 rounded-3xl">
-            <h3 class="text-[10px] font-black text-zinc-600 uppercase tracking-widest mb-6">Privacy Statistics</h3>
-            <div class="grid grid-cols-2 gap-6">
-                <div>
-                    <p id="stat-count" class="text-4xl font-black text-white italic tracking-tighter">0</p>
-                    <p class="text-[9px] font-bold text-zinc-500 uppercase tracking-widest">Files Scrubbed</p>
-                </div>
-                <div>
-                    <p id="stat-secure" class="text-4xl font-black text-emerald-500 italic tracking-tighter">100%</p>
-                    <p class="text-[9px] font-bold text-zinc-500 uppercase tracking-widest">Local-Only</p>
-                </div>
+        <section class="glass p-6 rounded-3xl space-y-4">
+            <div class="flex items-center gap-3 text-blue-400">
+                <i data-lucide="file-code"></i>
+                <h3 class="font-bold">Rapid Cheat Sheets</h3>
+            </div>
+            <div class="grid grid-cols-1 gap-2">
+                <details class="group bg-black/40 border border-zinc-800 rounded-xl overflow-hidden">
+                    <summary class="p-4 text-xs font-bold cursor-pointer list-none flex justify-between">
+                        Tailwind CSS Layouts <i data-lucide="chevron-down" class="w-4 h-4 text-zinc-600 group-open:rotate-180 transition-transform"></i>
+                    </summary>
+                    <div class="p-4 pt-0 text-[10px] text-zinc-400 space-y-2">
+                        <code class="block bg-zinc-900 p-2 rounded">flex items-center justify-between</code>
+                        <code class="block bg-zinc-900 p-2 rounded">grid grid-cols-1 md:grid-cols-2</code>
+                    </div>
+                </details>
+                <details class="group bg-black/40 border border-zinc-800 rounded-xl overflow-hidden">
+                    <summary class="p-4 text-xs font-bold cursor-pointer list-none flex justify-between">
+                        React Snippets <i data-lucide="chevron-down" class="w-4 h-4 text-zinc-600 group-open:rotate-180 transition-transform"></i>
+                    </summary>
+                    <div class="p-4 pt-0 text-[10px] text-zinc-400 space-y-2">
+                        <code class="block bg-zinc-900 p-2 rounded">const [data, setData] = useState(null);</code>
+                    </div>
+                </details>
             </div>
         </section>
 
@@ -88,80 +83,45 @@
     <script>
         lucide.createIcons();
 
-        // Initialize Stats from LocalStorage
-        let count = localStorage.getItem('scrubCount') || 0;
-        document.getElementById('stat-count').innerText = count;
+        // JSON Logic
+        function formatJSON() {
+            const area = document.getElementById('json-input');
+            try {
+                const obj = JSON.parse(area.value);
+                area.value = JSON.stringify(obj, null, 4);
+            } catch (e) { alert("Invalid JSON structure detected."); }
+        }
 
-        // 1. METADATA SCRUBBER LOGIC
-        async function processScrub(event) {
+        function minifyJSON() {
+            const area = document.getElementById('json-input');
+            try {
+                const obj = JSON.parse(area.value);
+                area.value = JSON.stringify(obj);
+            } catch (e) { alert("Invalid JSON."); }
+        }
+
+        // Metadata Logic
+        function stripMetadata(event) {
             const file = event.target.files[0];
-            const badge = document.getElementById('scrub-badge');
+            const status = document.getElementById('strip-status');
             if (!file) return;
 
-            badge.innerText = "SCRUBBING...";
-            badge.className = "status-badge bg-rose-500/20 text-rose-500";
-
+            status.innerText = "Privacy Scrubbing...";
             const img = new Image();
             img.src = URL.createObjectURL(file);
-            
             img.onload = () => {
                 const canvas = document.createElement('canvas');
                 canvas.width = img.width;
                 canvas.height = img.height;
-                const ctx = canvas.getContext('2d');
-                ctx.drawImage(img, 0, 0);
-                
-                // Canvas toBlob strips all metadata by creating a new raster data stream
+                canvas.getContext('2d').drawImage(img, 0, 0);
                 canvas.toBlob((blob) => {
-                    const url = URL.createObjectURL(blob);
                     const link = document.createElement('a');
-                    link.href = url;
-                    link.download = `scrubbed_${file.name}`;
+                    link.href = URL.createObjectURL(blob);
+                    link.download = `private_${file.name}`;
                     link.click();
-                    
-                    // Update UI & Stats
-                    badge.innerText = "SUCCESS";
-                    badge.className = "status-badge bg-emerald-500/20 text-emerald-500";
-                    updateStats();
-                }, 'image/jpeg', 0.95);
+                    status.innerText = "Cleaned & Downloaded!";
+                }, 'image/jpeg', 0.9);
             };
-        }
-
-        // 2. DUPLICATE FINDER LOGIC
-        function updateFileLabel(num) {
-            const file = document.getElementById('file' + num).files[0];
-            if (file) {
-                document.getElementById('label' + num).innerText = file.name;
-                document.getElementById('label' + num).classList.add('text-white');
-            }
-        }
-
-        function compareFiles() {
-            const f1 = document.getElementById('file1').files[0];
-            const f2 = document.getElementById('file2').files[0];
-            const res = document.getElementById('compare-result');
-
-            if (!f1 || !f2) return alert("Select two files.");
-
-            res.innerText = "Processing...";
-            
-            setTimeout(() => {
-                // Byte-size comparison + metadata simulation
-                if (f1.size === f2.size && f1.type === f2.type) {
-                    res.className = "text-center text-[10px] font-bold text-emerald-500 tracking-widest uppercase";
-                    res.innerText = "✓ Byte-for-Byte Match";
-                } else {
-                    res.className = "text-center text-[10px] font-bold text-rose-500 tracking-widest uppercase";
-                    res.innerText = "✕ Unique Files Detected";
-                }
-            }, 600);
-        }
-
-        // 3. STATS UPDATER
-        function updateStats() {
-            count++;
-            localStorage.setItem('scrubCount', count);
-            document.getElementById('stat-count').innerText = count;
         }
     </script>
 </body>
