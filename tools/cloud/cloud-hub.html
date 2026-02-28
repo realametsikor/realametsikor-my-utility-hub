@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cloud Estimator | Utility OS</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body { background-color: #050505; color: #fafafa; font-family: -apple-system, sans-serif; }
+        .glass { background: rgba(23, 23, 23, 0.7); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.05); }
+        select, input { background: #121212 !important; border: 1px solid #27272a !important; color: white !important; }
+    </style>
+</head>
+<body class="pb-24">
+
+    <nav class="p-6">
+        <a href="../../index.html" class="inline-flex items-center gap-2 text-zinc-500 hover:text-amber-500 transition-all">
+            <i data-lucide="arrow-left" class="w-4 h-4"></i>
+            <span class="text-sm font-bold uppercase tracking-widest">Dashboard</span>
+        </a>
+    </nav>
+
+    <main class="px-6 max-w-md mx-auto space-y-8">
+        
+        <header>
+            <h1 class="text-3xl font-black tracking-tighter italic">Cloud <span class="text-amber-500">Estimator</span></h1>
+            <p class="text-zinc-500 text-xs font-medium">Architecture & Budget Projection</p>
+        </header>
+
+        <section class="glass p-6 rounded-3xl space-y-6">
+            <div class="space-y-2">
+                <label class="text-[10px] font-bold text-zinc-500 uppercase">Provider</label>
+                <select id="provider" class="w-full p-3 rounded-xl text-sm outline-none">
+                    <option value="aws">AWS (Amazon Web Services)</option>
+                    <option value="azure">Microsoft Azure</option>
+                    <option value="gcp">Google Cloud Platform</option>
+                </select>
+            </div>
+
+            <div class="space-y-2">
+                <label class="text-[10px] font-bold text-zinc-500 uppercase">Compute (Instances)</label>
+                <div class="flex items-center gap-4">
+                    <input type="number" id="compute-qty" value="1" class="w-20 p-3 rounded-xl text-sm outline-none">
+                    <select id="compute-size" class="flex-1 p-3 rounded-xl text-sm outline-none">
+                        <option value="15">Small (2 vCPU, 4GB RAM)</option>
+                        <option value="45">Medium (4 vCPU, 16GB RAM)</option>
+                        <option value="120">Large (8 vCPU, 32GB RAM)</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="space-y-2">
+                <label class="text-[10px] font-bold text-zinc-500 uppercase">Storage (GB)</label>
+                <input type="range" id="storage-range" min="10" max="2000" step="10" value="100" class="w-full accent-amber-500" oninput="updateStorageLabel(this.value)">
+                <p class="text-right text-[10px] font-mono text-amber-500" id="storage-label">100 GB</p>
+            </div>
+
+            <button onclick="calculateCost()" class="w-full bg-amber-500 text-black py-4 rounded-2xl font-black text-sm uppercase tracking-widest shadow-lg shadow-amber-500/20 active:scale-95 transition-all">Calculate Monthly Burn</button>
+        </section>
+
+        <section id="result-card" class="hidden glass p-8 rounded-3xl border-t-4 border-amber-500 animate-in fade-in slide-in-from-bottom-4 duration-500">
+            <p class="text-[10px] font-bold text-zinc-500 uppercase text-center mb-2">Estimated Monthly Total</p>
+            <h2 id="total-cost" class="text-5xl font-black text-white text-center tracking-tighter">$0.00</h2>
+            <div class="mt-6 pt-6 border-t border-zinc-800 flex justify-between items-center">
+                <span class="text-xs text-zinc-500 font-medium">Daily Average:</span>
+                <span id="daily-cost" class="text-xs font-bold text-amber-500">$0.00</span>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        lucide.createIcons();
+
+        function updateStorageLabel(val) {
+            document.getElementById('storage-label').innerText = val + " GB";
+        }
+
+        function calculateCost() {
+            const provider = document.getElementById('provider').value;
+            const computeQty = parseInt(document.getElementById('compute-qty').value);
+            const computePrice = parseInt(document.getElementById('compute-size').value);
+            const storageGB = parseInt(document.getElementById('storage-range').value);
+
+            // Pricing logic (Generalized for global baseline)
+            const storageCost = storageGB * 0.10; // $0.10 per GB
+            let providerMultiplier = 1;
+            
+            if(provider === 'azure') providerMultiplier = 1.05;
+            if(provider === 'gcp') providerMultiplier = 0.95;
+
+            const monthlyTotal = ((computeQty * computePrice) + storageCost) * providerMultiplier;
+            
+            document.getElementById('total-cost').innerText = "$" + monthlyTotal.toFixed(2);
+            document.getElementById('daily-cost').innerText = "$" + (monthlyTotal / 30).toFixed(2);
+            document.getElementById('result-card').classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
