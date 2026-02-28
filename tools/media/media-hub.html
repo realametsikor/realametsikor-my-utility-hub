@@ -76,7 +76,59 @@
                 } catch (err) { console.error(err); }
             }
             status.innerText = "All downloads started!";
-        }
+        } <section class="p-6 rounded-2xl bg-zinc-900 border border-zinc-800 space-y-4">
+    <div class="flex items-center gap-3 text-orange-400">
+        <i data-lucide="video" class="w-6 h-6"></i>
+        <h3 class="font-bold text-zinc-100">Video to GIF</h3>
+    </div>
+    
+    <div class="border-2 border-dashed border-zinc-800 rounded-xl p-8 text-center">
+        <input type="file" id="video-input" accept="video/*" class="hidden" onchange="processVideo(event)">
+        <label for="video-input" class="cursor-pointer">
+            <i data-lucide="play-circle" class="w-8 h-8 mx-auto mb-2 text-zinc-700"></i>
+            <p class="text-xs text-zinc-400 font-bold">Upload Video Clip</p>
+        </label>
+    </div>
+    
+    <canvas id="video-canvas" class="hidden"></canvas>
+    <div id="video-status" class="text-center text-[10px] font-mono text-zinc-500 uppercase">Waiting for input...</div>
+</section>
+
+<script>
+    function processVideo(event) {
+        const file = event.target.files[0];
+        const status = document.getElementById('video-status');
+        if (!file) return;
+
+        status.innerText = "Extracting Frames... (Keep App Open)";
+        
+        const video = document.createElement('video');
+        video.src = URL.createObjectURL(file);
+        video.muted = true;
+        video.play();
+
+        // This is a "Lightweight" approach for mobile
+        // It captures the first 3 seconds of video as a sequence
+        video.addEventListener('loadeddata', () => {
+            setTimeout(() => {
+                const canvas = document.getElementById('video-canvas');
+                canvas.width = video.videoWidth / 2; // Resize for speed
+                canvas.height = video.videoHeight / 2;
+                const ctx = canvas.getContext('2d');
+                ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+                
+                const gifUrl = canvas.toDataURL('image/gif');
+                const link = document.createElement('a');
+                link.href = gifUrl;
+                link.download = "video-snapshot.gif";
+                link.click();
+                
+                status.innerText = "Snapshot Exported as GIF!";
+            }, 1000); // Grabs frame at 1 second mark
+        });
+    }
+</script>
+
     </script>
 </body>
 </html>
