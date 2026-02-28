@@ -3,93 +3,116 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UtilityOS | All-in-One Developer & Media Toolkit</title>
-    <meta name="description" content="Professional-grade cloud estimator, image compressor, metadata scrubber, and AI productivity tools. All-in-one suite for global developers.">
-    <meta name="keywords" content="Cloud Cost Estimator, Image Compressor, SVG to Tailwind, Metadata Remover, AI Tools">
-    
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="UtilityOS | The Universal Developer Toolkit">
-    <meta property="og:description" content="Free, private, and powerful tools for the modern web.">
-
+    <title>UtilityOS | The Universal Toolkit</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
-        :root { --accent: #3b82f6; }
-        body { background-color: #020617; color: #f8fafc; font-family: 'Inter', sans-serif; }
-        .hero-gradient { background: radial-gradient(circle at 50% -20%, #1e3a8a 0%, #020617 80%); }
-        .feature-card { background: rgba(30, 41, 59, 0.5); border: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(10px); transition: all 0.3s ease; }
-        .feature-card:hover { border-color: var(--accent); transform: translateY(-5px); box-shadow: 0 10px 30px -10px rgba(59, 130, 246, 0.3); }
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap');
+        
+        body { 
+            background-color: #020617; 
+            color: #f8fafc; 
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Animated Background Glow */
+        .bg-glow {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at 50% -20%, #1e1b4b 0%, #020617 80%);
+            z-index: -1;
+        }
+
+        /* Hover Interaction: The "SaaS" Pop */
+        .tool-card {
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(12px);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+        }
+
+        .tool-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            border-color: rgba(59, 130, 246, 0.5);
+            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5), 0 0 20px rgba(59, 130, 246, 0.1);
+        }
+
+        .tool-card:active { transform: scale(0.98); }
+
+        /* Icon Glow Effect */
+        .icon-box { transition: all 0.3s ease; }
+        .tool-card:hover .icon-box { transform: rotate(10deg) scale(1.1); }
+        
+        .badge { font-size: 9px; font-weight: 800; letter-spacing: 0.1em; }
     </style>
 </head>
-<body>
+<body class="p-6 md:p-12">
+    <div class="bg-glow"></div>
 
-    <nav class="flex justify-between items-center px-6 py-6 max-w-6xl mx-auto">
-        <div class="text-2xl font-black italic tracking-tighter">Utility<span class="text-blue-500">OS</span></div>
-        <div class="hidden md:flex gap-8 text-sm font-medium text-zinc-400">
-            <a href="#features" class="hover:text-white">Features</a>
-            <a href="https://github.com/your-username" class="hover:text-white">GitHub</a>
+    <header class="max-w-5xl mx-auto mb-16 flex justify-between items-start">
+        <div class="space-y-2">
+            <h1 class="text-4xl font-extrabold tracking-tighter italic">Utility<span class="text-blue-500">OS</span></h1>
+            <p class="text-zinc-500 text-sm font-medium uppercase tracking-[0.2em]">Global Release v2.1</p>
         </div>
-        <button class="bg-blue-600 px-5 py-2 rounded-full text-sm font-bold hover:bg-blue-500 transition-all">Go Pro</button>
-    </nav>
-
-    <header class="hero-gradient pt-20 pb-32 px-6 text-center">
-        <h1 class="text-5xl md:text-7xl font-black tracking-tighter mb-6">Built for the <span class="text-blue-500 underline decoration-8 underline-offset-8">Global</span> Creator.</h1>
-        <p class="text-zinc-400 max-w-2xl mx-auto text-lg md:text-xl leading-relaxed">
-            A high-performance suite of media, cloud, and AI tools. Zero tracking. 100% Client-side. Built for speed and privacy.
-        </p>
+        <button class="bg-white text-black px-6 py-2 rounded-full text-xs font-bold hover:bg-blue-500 hover:text-white transition-all shadow-xl">GO PRO</button>
     </header>
 
-    <main id="features" class="max-w-6xl mx-auto px-6 -mt-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+    <main class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
         
-        <a href="tools/media/media-hub.html" class="feature-card p-8 rounded-3xl flex flex-col gap-4">
-            <div class="w-12 h-12 bg-blue-600/20 text-blue-500 rounded-2xl flex items-center justify-center">
-                <i data-lucide="camera"></i>
+        <a href="tools/media/media-hub.html" class="tool-card p-8 rounded-[2.5rem] flex flex-col justify-between h-64">
+            <div class="icon-box w-14 h-14 bg-blue-600/10 text-blue-500 rounded-2xl flex items-center justify-center border border-blue-500/20">
+                <i data-lucide="layers" class="w-7 h-7"></i>
             </div>
             <div>
-                <h3 class="text-xl font-bold">Smart Media</h3>
-                <p class="text-zinc-500 text-sm mt-2 font-medium">Compress images, convert SVGs, and generate GIFs instantly.</p>
+                <span class="badge text-blue-500 uppercase mb-2 block">Visual Engine</span>
+                <h2 class="text-2xl font-bold">Media Hub</h2>
+                <p class="text-zinc-500 text-sm mt-1">SVG to Tailwind, Image Compression & Video Snapshot.</p>
             </div>
         </a>
 
-        <a href="tools/ai/ai-hub.html" class="feature-card p-8 rounded-3xl flex flex-col gap-4">
-            <div class="w-12 h-12 bg-purple-600/20 text-purple-500 rounded-2xl flex items-center justify-center">
-                <i data-lucide="sparkles"></i>
+        <a href="tools/ai/ai-hub.html" class="tool-card p-8 rounded-[2.5rem] flex flex-col justify-between h-64">
+            <div class="icon-box w-14 h-14 bg-purple-600/10 text-purple-500 rounded-2xl flex items-center justify-center border border-purple-500/20">
+                <i data-lucide="sparkles" class="w-7 h-7"></i>
             </div>
             <div>
-                <h3 class="text-xl font-bold">AI Suite</h3>
-                <p class="text-zinc-500 text-sm mt-2 font-medium">Turn YouTube videos into SEO-ready blog posts in seconds.</p>
+                <span class="badge text-purple-500 uppercase mb-2 block">Neural Bridge</span>
+                <h2 class="text-2xl font-bold">AI Productivity</h2>
+                <p class="text-zinc-500 text-sm mt-1">YouTube to Markdown, Prompt Refiner & Smart Summary.</p>
             </div>
         </a>
 
-        <a href="tools/clean/clean-hub.html" class="feature-card p-8 rounded-3xl flex flex-col gap-4">
-            <div class="w-12 h-12 bg-rose-600/20 text-rose-500 rounded-2xl flex items-center justify-center">
-                <i data-lucide="shield-check"></i>
+        <a href="tools/clean/clean-hub.html" class="tool-card p-8 rounded-[2.5rem] flex flex-col justify-between h-64 border-rose-500/10 hover:border-rose-500/50">
+            <div class="icon-box w-14 h-14 bg-rose-600/10 text-rose-500 rounded-2xl flex items-center justify-center border border-rose-500/20">
+                <i data-lucide="shield-check" class="w-7 h-7"></i>
             </div>
             <div>
-                <h3 class="text-xl font-bold">Clean-Up</h3>
-                <p class="text-zinc-500 text-sm mt-2 font-medium">Professional metadata scrubbing and duplicate file removal.</p>
+                <span class="badge text-rose-500 uppercase mb-2 block">Sanitization</span>
+                <h2 class="text-2xl font-bold">Clean-Up Pro</h2>
+                <p class="text-zinc-500 text-sm mt-1">JSON Fixer, Metadata Stripper & Rapid Cheat Sheets.</p>
             </div>
         </a>
 
-        <a href="tools/cloud/cloud-hub.html" class="feature-card p-8 rounded-3xl flex flex-col gap-4">
-            <div class="w-12 h-12 bg-amber-600/20 text-amber-500 rounded-2xl flex items-center justify-center">
-                <i data-lucide="cloud-cog"></i>
+        <a href="tools/cloud/cloud-hub.html" class="tool-card p-8 rounded-[2.5rem] flex flex-col justify-between h-64 border-amber-500/10 hover:border-amber-500/50">
+            <div class="icon-box w-14 h-14 bg-amber-600/10 text-amber-500 rounded-2xl flex items-center justify-center border border-amber-500/20">
+                <i data-lucide="cloud-cog" class="w-7 h-7"></i>
             </div>
             <div>
-                <h3 class="text-xl font-bold">Cloud Est.</h3>
-                <p class="text-zinc-500 text-sm mt-2 font-medium">Global architecture cost estimator for AWS, Azure, and GCP.</p>
+                <span class="badge text-amber-500 uppercase mb-2 block">Architecture</span>
+                <h2 class="text-2xl font-bold">Cloud Est.</h2>
+                <p class="text-zinc-500 text-sm mt-1">Multi-Provider (AWS/GCP/Azure) Burn Rate Calculator.</p>
             </div>
         </a>
 
     </main>
 
-    <footer class="mt-40 border-t border-zinc-900 py-20 px-6 text-center">
-        <div class="max-w-6xl mx-auto flex flex-col items-center gap-6">
-            <div class="text-xl font-black italic tracking-tighter">Utility<span class="text-blue-500">OS</span></div>
-            <p class="text-zinc-600 text-sm max-w-md">© 2026 UtilityOS. Launched globally for a faster, more private internet experience.</p>
-        </div>
+    <footer class="max-w-5xl mx-auto mt-20 text-center py-10 border-t border-zinc-900">
+        <p class="text-[10px] text-zinc-600 font-bold uppercase tracking-[0.4em]">Designed for Global Monetization © 2026</p>
     </footer>
 
-    <script>lucide.createIcons();</script>
+    <script>
+        lucide.createIcons();
+    </script>
 </body>
 </html>
