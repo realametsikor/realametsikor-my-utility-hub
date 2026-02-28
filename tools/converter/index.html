@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Universal Converter | UtilityOS Pro</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body { background-color: #020617; color: #f8fafc; font-family: 'Inter', sans-serif; }
+        .glass-ui { 
+            background: rgba(15, 23, 42, 0.7); 
+            backdrop-filter: blur(20px); 
+            border: 1px solid rgba(255, 255, 255, 0.08); 
+        }
+        .glow-effect {
+            box-shadow: 0 0 50px -10px rgba(79, 70, 229, 0.3);
+        }
+        .shimmer {
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent);
+            background-size: 200% 100%;
+            animation: shimmer 3s infinite;
+        }
+        @keyframes shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col items-center justify-center p-6 relative overflow-hidden">
+    
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[500px] bg-indigo-600/10 blur-[120px] rounded-full"></div>
+
+    <nav class="absolute top-8 left-8">
+        <a href="../../index.html" class="flex items-center gap-2 text-slate-500 hover:text-white transition-colors">
+            <i data-lucide="chevron-left" class="w-4 h-4"></i>
+            <span class="text-xs font-bold uppercase tracking-widest">System Dashboard</span>
+        </a>
+    </nav>
+
+    <main class="w-full max-w-3xl z-10">
+        <div class="text-center mb-10">
+            <h1 class="text-4xl md:text-6xl font-black tracking-tighter mb-4 italic">
+                The <span class="text-indigo-500">Universal</span> Engine.
+            </h1>
+            <p class="text-slate-400 font-medium text-sm md:text-base">Secure, high-speed conversion. No servers. No limits.</p>
+        </div>
+
+        <div class="glass-ui rounded-[2.5rem] p-4 md:p-8 glow-effect shimmer">
+            <div id="drop-area" class="border-2 border-dashed border-slate-800 rounded-[2rem] py-24 flex flex-col items-center justify-center transition-all hover:border-indigo-500/50 hover:bg-indigo-500/5 group relative">
+                <input type="file" id="file-upload" class="absolute inset-0 opacity-0 cursor-pointer" multiple>
+                
+                <div class="w-20 h-20 bg-indigo-500/10 text-indigo-500 rounded-3xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500">
+                    <i data-lucide="file-up" class="w-10 h-10"></i>
+                </div>
+
+                <h2 class="text-xl font-bold mb-2">Drag & Drop Files</h2>
+                <p class="text-slate-500 text-sm font-medium">PNG, JPG, SVG, JSON, MP4, or PDF</p>
+                
+                <div class="mt-8 flex gap-3">
+                    <span class="px-3 py-1 bg-slate-900 border border-slate-800 rounded-full text-[10px] font-bold text-slate-400 uppercase tracking-tighter">Instant Edge Processing</span>
+                    <span class="px-3 py-1 bg-slate-900 border border-slate-800 rounded-full text-[10px] font-bold text-slate-400 uppercase tracking-tighter">Zero Logs</span>
+                </div>
+            </div>
+
+            <div id="format-options" class="hidden mt-8 pt-8 border-t border-slate-800/50 animate-in fade-in slide-in-from-bottom-4">
+                <div class="flex items-center justify-between mb-4">
+                    <span class="text-xs font-bold text-slate-400 uppercase">Target Format</span>
+                    <select class="bg-slate-900 border border-slate-800 text-white rounded-lg px-4 py-2 text-xs font-bold outline-none">
+                        <option>Convert to WebP</option>
+                        <option>Convert to PNG</option>
+                        <option>Convert to PDF</option>
+                        <option>Minify JSON</option>
+                    </select>
+                </div>
+                <button onclick="simulateProcess()" class="w-full bg-indigo-600 hover:bg-indigo-500 py-4 rounded-2xl font-black text-sm uppercase tracking-widest shadow-lg shadow-indigo-600/20 transition-all active:scale-95">Start Conversion</button>
+            </div>
+        </div>
+
+        <div class="mt-12 w-full h-32 bg-slate-900/30 border border-slate-800/50 rounded-3xl flex items-center justify-center relative overflow-hidden group">
+            <div class="absolute inset-0 shimmer opacity-50"></div>
+            <div class="text-center z-10">
+                <p class="text-[10px] font-black text-slate-600 uppercase tracking-[0.3em] mb-2">Advertisement</p>
+                <p class="text-xs text-slate-400 italic">Global Sponsor Space - Enquire for Placement</p>
+            </div>
+        </div>
+    </main>
+
+    <footer class="mt-16 text-slate-600 text-[10px] font-bold uppercase tracking-[0.4em]">
+        UtilityOS Distributed Engine © 2026
+    </footer>
+
+    <script>
+        lucide.createIcons();
+
+        const fileInput = document.getElementById('file-upload');
+        const formatOptions = document.getElementById('format-options');
+
+        fileInput.addEventListener('change', (e) => {
+            if(e.target.files.length > 0) {
+                formatOptions.classList.remove('hidden');
+            }
+        });
+
+        function simulateProcess() {
+            const btn = document.querySelector('button');
+            btn.innerText = "Processing...";
+            btn.disabled = true;
+            setTimeout(() => {
+                alert("Conversion complete! Ready for download.");
+                btn.innerText = "Start Conversion";
+                btn.disabled = false;
+            }, 2000);
+        }
+    </script>
+</body>
+</html>
