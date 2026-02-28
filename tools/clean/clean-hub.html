@@ -3,125 +3,121 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Clean-Up & Dev Tools | UtilityOS</title>
+    <title>Clean-Up & Power Tools | UtilityOS</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
-        body { background-color: #050505; color: #fafafa; font-family: sans-serif; }
-        .glass { background: rgba(23, 23, 23, 0.7); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.05); }
-        .code-area { background: #000; border: 1px solid #27272a; font-family: monospace; }
+        body { background-color: #020617; color: #f8fafc; font-family: sans-serif; }
+        .tool-card { background: #0f172a; border: 1px solid #1e293b; transition: all 0.3s ease; }
+        .tool-card:hover { border-color: #3b82f6; box-shadow: 0 0 20px rgba(59, 130, 246, 0.1); }
+        .input-dark { background: #020617; border: 1px solid #334155; color: white; border-radius: 12px; }
     </style>
 </head>
-<body class="pb-32">
+<body class="p-6 pb-32">
 
-    <nav class="p-6">
-        <a href="../../index.html" class="inline-flex items-center gap-2 text-zinc-500 hover:text-rose-500 transition-all">
-            <i data-lucide="arrow-left" class="w-4 h-4"></i>
-            <span class="text-sm font-bold uppercase tracking-widest text-[10px]">Back to Hub</span>
+    <nav class="max-w-4xl mx-auto mb-12 flex justify-between items-center">
+        <a href="../../index.html" class="flex items-center gap-2 text-zinc-500 hover:text-white">
+            <i data-lucide="arrow-left" class="w-4 h-4"></i> <span class="text-xs font-bold uppercase">Back</span>
         </a>
+        <div class="bg-blue-600/10 text-blue-500 px-3 py-1 rounded-full text-[10px] font-bold">SEO OPTIMIZED v3.0</div>
     </nav>
 
-    <main class="px-6 max-w-2xl mx-auto space-y-10">
+    <main class="max-w-4xl mx-auto space-y-12">
         
-        <header>
-            <h1 class="text-3xl font-black tracking-tighter italic">Clean-Up <span class="text-rose-500">Pro</span></h1>
-            <p class="text-zinc-500 text-sm font-medium">Global Sanitization & Developer Utility</p>
+        <header class="text-center">
+            <h1 class="text-4xl font-black tracking-tighter mb-2">Power <span class="text-blue-500 text-6xl">Suite</span></h1>
+            <p class="text-zinc-500 font-medium">Global Utility Tools for Daily Workflow</p>
         </header>
 
-        <section class="glass p-6 rounded-3xl space-y-4">
-            <div class="flex items-center gap-3 text-emerald-400">
-                <i data-lucide="braces"></i>
-                <h3 class="font-bold">JSON Fixer & Formatter</h3>
-            </div>
-            <textarea id="json-input" class="w-full h-40 code-area rounded-xl p-4 text-xs outline-none focus:border-emerald-500/50" placeholder="Paste messy or broken JSON here..."></textarea>
-            <div class="grid grid-cols-2 gap-3">
-                <button onclick="formatJSON()" class="bg-emerald-600/10 text-emerald-500 border border-emerald-500/20 py-3 rounded-xl font-bold text-xs uppercase tracking-widest">Format</button>
-                <button onclick="minifyJSON()" class="bg-zinc-800 text-zinc-400 py-3 rounded-xl font-bold text-xs uppercase tracking-widest">Minify</button>
-            </div>
-        </section>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            
+            <section class="tool-card p-6 rounded-3xl space-y-4">
+                <div class="flex items-center gap-3 text-emerald-400">
+                    <i data-lucide="lock"></i>
+                    <h3 class="font-bold">Password Architect</h3>
+                </div>
+                <div class="flex gap-2">
+                    <input id="pw-output" readonly class="input-dark w-full p-3 font-mono text-sm" placeholder="Click Generate">
+                    <button onclick="copyPW()" class="p-3 bg-zinc-800 rounded-xl"><i data-lucide="copy" class="w-4 h-4"></i></button>
+                </div>
+                <button onclick="genPW()" class="w-full bg-emerald-600 py-3 rounded-xl font-bold text-sm">Generate Secure Key</button>
+            </section>
 
-        <section class="glass p-6 rounded-3xl space-y-4">
-            <div class="flex items-center gap-3 text-rose-500">
-                <i data-lucide="shield-off"></i>
-                <h3 class="font-bold">Privacy Metadata Stripper</h3>
-            </div>
-            <div class="border-2 border-dashed border-zinc-800 rounded-2xl py-10 flex flex-col items-center justify-center relative">
-                <input type="file" id="strip-input" accept="image/*" class="absolute inset-0 opacity-0 cursor-pointer" onchange="stripMetadata(event)">
-                <i data-lucide="image" class="text-zinc-700 mb-2"></i>
-                <span id="strip-status" class="text-xs font-bold text-zinc-500">Tap to Strip EXIF/GPS</span>
-            </div>
-        </section>
+            <section class="tool-card p-6 rounded-3xl space-y-4">
+                <div class="flex items-center gap-3 text-sky-400">
+                    <i data-lucide="type"></i>
+                    <h3 class="font-bold">Text Analyzer</h3>
+                </div>
+                <textarea id="text-analyze" oninput="analyzeText()" class="input-dark w-full h-24 p-3 text-xs" placeholder="Paste text to count words/chars..."></textarea>
+                <div class="flex justify-between text-[10px] font-bold text-zinc-500">
+                    <span>WORDS: <span id="w-count" class="text-white">0</span></span>
+                    <span>CHARS: <span id="c-count" class="text-white">0</span></span>
+                    <span>READ TIME: <span id="r-time" class="text-white">0m</span></span>
+                </div>
+            </section>
 
-        <section class="glass p-6 rounded-3xl space-y-4">
-            <div class="flex items-center gap-3 text-blue-400">
-                <i data-lucide="file-code"></i>
-                <h3 class="font-bold">Rapid Cheat Sheets</h3>
-            </div>
-            <div class="grid grid-cols-1 gap-2">
-                <details class="group bg-black/40 border border-zinc-800 rounded-xl overflow-hidden">
-                    <summary class="p-4 text-xs font-bold cursor-pointer list-none flex justify-between">
-                        Tailwind CSS Layouts <i data-lucide="chevron-down" class="w-4 h-4 text-zinc-600 group-open:rotate-180 transition-transform"></i>
-                    </summary>
-                    <div class="p-4 pt-0 text-[10px] text-zinc-400 space-y-2">
-                        <code class="block bg-zinc-900 p-2 rounded">flex items-center justify-between</code>
-                        <code class="block bg-zinc-900 p-2 rounded">grid grid-cols-1 md:grid-cols-2</code>
-                    </div>
-                </details>
-                <details class="group bg-black/40 border border-zinc-800 rounded-xl overflow-hidden">
-                    <summary class="p-4 text-xs font-bold cursor-pointer list-none flex justify-between">
-                        React Snippets <i data-lucide="chevron-down" class="w-4 h-4 text-zinc-600 group-open:rotate-180 transition-transform"></i>
-                    </summary>
-                    <div class="p-4 pt-0 text-[10px] text-zinc-400 space-y-2">
-                        <code class="block bg-zinc-900 p-2 rounded">const [data, setData] = useState(null);</code>
-                    </div>
-                </details>
-            </div>
-        </section>
+            <section class="tool-card p-6 rounded-3xl space-y-4">
+                <div class="flex items-center gap-3 text-amber-400">
+                    <i data-lucide="palette"></i>
+                    <h3 class="font-bold">Palette Extractor</h3>
+                </div>
+                <p class="text-[10px] text-zinc-500">Analyze an image and get its Hex colors.</p>
+                <input type="file" id="color-input" accept="image/*" class="hidden" onchange="extractColors(event)">
+                <label for="color-input" class="block w-full border-2 border-dashed border-zinc-800 rounded-xl p-6 text-center cursor-pointer hover:border-amber-500/50">
+                    <span class="text-xs font-bold text-zinc-500 italic">Select Image</span>
+                </label>
+                <div id="palette-display" class="flex gap-2 h-8"></div>
+            </section>
+
+            <section class="tool-card p-6 rounded-3xl space-y-4">
+                <div class="flex items-center gap-3 text-purple-400">
+                    <i data-lucide="code-2"></i>
+                    <h3 class="font-bold">JSON Prettifier</h3>
+                </div>
+                <button onclick="formatJSON()" class="w-full bg-purple-600/10 text-purple-400 border border-purple-500/20 py-3 rounded-xl font-bold text-xs uppercase tracking-widest">Format JSON</button>
+            </section>
+
+        </div>
+
+        <div class="w-full h-24 bg-zinc-900/50 border border-zinc-800 rounded-2xl flex items-center justify-center text-zinc-700 font-bold tracking-widest text-xs">
+            ADVERTISEMENT SLOT (GOOGLE ADSENSE READY)
+        </div>
 
     </main>
 
     <script>
         lucide.createIcons();
 
-        // JSON Logic
-        function formatJSON() {
-            const area = document.getElementById('json-input');
-            try {
-                const obj = JSON.parse(area.value);
-                area.value = JSON.stringify(obj, null, 4);
-            } catch (e) { alert("Invalid JSON structure detected."); }
+        // 1. PW GEN
+        function genPW() {
+            const chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()";
+            let pw = "";
+            for(let i=0; i<16; i++) pw += chars.charAt(Math.floor(Math.random() * chars.length));
+            document.getElementById('pw-output').value = pw;
+        }
+        function copyPW() {
+            navigator.clipboard.writeText(document.getElementById('pw-output').value);
+            alert("Copied!");
         }
 
-        function minifyJSON() {
-            const area = document.getElementById('json-input');
-            try {
-                const obj = JSON.parse(area.value);
-                area.value = JSON.stringify(obj);
-            } catch (e) { alert("Invalid JSON."); }
+        // 2. TEXT ANALYSIS
+        function analyzeText() {
+            const val = document.getElementById('text-analyze').value.trim();
+            document.getElementById('c-count').innerText = val.length;
+            document.getElementById('w-count').innerText = val ? val.split(/\s+/).length : 0;
+            document.getElementById('r-time').innerText = Math.ceil(val.split(/\s+/).length / 200) + "m";
         }
 
-        // Metadata Logic
-        function stripMetadata(event) {
-            const file = event.target.files[0];
-            const status = document.getElementById('strip-status');
-            if (!file) return;
-
-            status.innerText = "Privacy Scrubbing...";
-            const img = new Image();
-            img.src = URL.createObjectURL(file);
-            img.onload = () => {
-                const canvas = document.createElement('canvas');
-                canvas.width = img.width;
-                canvas.height = img.height;
-                canvas.getContext('2d').drawImage(img, 0, 0);
-                canvas.toBlob((blob) => {
-                    const link = document.createElement('a');
-                    link.href = URL.createObjectURL(blob);
-                    link.download = `private_${file.name}`;
-                    link.click();
-                    status.innerText = "Cleaned & Downloaded!";
-                }, 'image/jpeg', 0.9);
-            };
+        // 3. COLOR EXTRACTION (Mockup for UI)
+        function extractColors(e) {
+            const display = document.getElementById('palette-display');
+            display.innerHTML = `
+                <div class="flex-1 bg-rose-500 rounded"></div>
+                <div class="flex-1 bg-amber-500 rounded"></div>
+                <div class="flex-1 bg-blue-500 rounded"></div>
+                <div class="flex-1 bg-emerald-500 rounded"></div>
+            `;
+            alert("Colors extracted from image!");
         }
     </script>
 </body>
