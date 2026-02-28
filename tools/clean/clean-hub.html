@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clean-Up Suite | Utility OS</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="bg-[#09090b] text-zinc-100 p-6 pb-24">
+
+    <nav class="mb-8">
+        <a href="../../index.html" class="inline-flex items-center gap-2 text-zinc-500 hover:text-rose-500 transition-colors">
+            <i data-lucide="arrow-left" class="w-4 h-4"></i>
+            <span class="text-sm font-medium">Back to Dashboard</span>
+        </a>
+    </nav>
+
+    <header class="mb-10">
+        <h2 class="text-2xl font-bold tracking-tight">Clean-Up <span class="text-rose-500">Suite</span></h2>
+        <p class="text-zinc-500 text-sm">Privacy & Optimization Tools</p>
+    </header>
+
+    <div class="space-y-8">
+        <section class="p-6 rounded-2xl bg-zinc-900 border border-zinc-800 space-y-4">
+            <div class="flex items-center gap-3 text-rose-400">
+                <i data-lucide="shield-off" class="w-6 h-6"></i>
+                <h3 class="font-bold text-zinc-100">Metadata Scrubber</h3>
+            </div>
+            <p class="text-[11px] text-zinc-500">Removes GPS, camera info, and timestamps from images for private sharing.</p>
+            <div class="border-2 border-dashed border-zinc-800 rounded-xl p-8 text-center">
+                <input type="file" id="meta-upload" accept="image/*" class="hidden" onchange="scrubMetadata(event)">
+                <label for="meta-upload" class="cursor-pointer">
+                    <i data-lucide="image" class="w-8 h-8 mx-auto mb-2 text-zinc-700"></i>
+                    <p class="text-xs text-zinc-400 font-bold">Upload to Scrub</p>
+                </label>
+            </div>
+            <div id="scrub-status" class="text-center text-[10px] font-mono text-zinc-500"></div>
+        </section>
+
+        <section class="p-6 rounded-2xl bg-zinc-900 border border-zinc-800 space-y-4">
+            <div class="flex items-center gap-3 text-sky-400">
+                <i data-lucide="scissors" class="w-6 h-6"></i>
+                <h3 class="font-bold text-zinc-100">BG Remover</h3>
+            </div>
+            <button onclick="alert('This requires an API Key (Remove.bg or Adobe). Ready to connect in the next step!')" class="w-full bg-zinc-800 border border-zinc-700 py-3 rounded-xl font-bold text-sm text-zinc-400">Connect API to Activate</button>
+        </section>
+    </div>
+
+    <script>
+        lucide.createIcons();
+
+        // Metadata Scrubbing Logic
+        // This uses a Canvas redraw trick to strip EXIF data entirely
+        async function scrubMetadata(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            
+            const status = document.getElementById('scrub-status');
+            status.innerText = "Privacy Scrubbing...";
+
+            const img = new Image();
+            img.src = URL.createObjectURL(file);
+            
+            img.onload = () => {
+                const canvas = document.createElement('canvas');
+                canvas.width = img.width;
+                canvas.height = img.height;
+                const ctx = canvas.getContext('2d');
+                ctx.drawImage(img, 0, 0);
+                
+                // Converting to Blob via canvas strips all EXIF/Metadata
+                canvas.toBlob((blob) => {
+                    const cleanUrl = URL.createObjectURL(blob);
+                    const link = document.createElement('a');
+                    link.href = cleanUrl;
+                    link.download = `private_${file.name}`;
+                    link.click();
+                    status.innerText = "Metadata Removed! Downloaded.";
+                }, 'image/jpeg', 0.9);
+            };
+        }
+    </script>
+</body>
+</html>
